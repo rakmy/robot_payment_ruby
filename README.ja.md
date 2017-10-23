@@ -29,6 +29,10 @@ gem 'robot_payment_ruby', path: "/path/to/foo"
 
 * Ruby 2.4.0+.
 
+## Config
+
+
+
 ## 使い方 (随時更新)
 
 ``` ruby
@@ -37,3 +41,17 @@ order = RobotPayment::Order.new
 order.purchase
 => Faraday::Response
 ```
+
+## TODO
+
+ aid : 店舗ID
+ rt  : 決済結果返信方法
+ cod : 店舗オーダー番号
+ cn  :カード番号
+ ed  :カード有効期限
+ fn  :カード名義
+ ln  :カード名義
+ em  :メールアドレス
+ pn  :電話番号
+ iid :商品コード
+ etc :任意パラメータ 1024Byte
