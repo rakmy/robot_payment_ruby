@@ -2,7 +2,7 @@
 module RobotPayment
   module Generators
     # rails g robot_payment:config
-    class ConfigGenerator < Rails::Generators::Base # :nodoc:
+    class ConfigGenerator < Rails::Generators::Base
       source_root File.expand_path(File.join(File.dirname(__FILE__), 'templates'))
 
       def copy_config_file
