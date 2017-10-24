@@ -19,7 +19,7 @@ module RobotPayment
     attr_accessor :aid, :rt, :max_amount, :min_amount
     def initialize
       @aid = ENV["AID"]
-      @rt = 0
+      @rt = 1
       @max_amount = 1000
       @min_amount = 100_000
     end

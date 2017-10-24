@@ -5,8 +5,9 @@ require "base64"
 
 module RobotPayment
   class Order
-    def test_uri
-      RobotPayment.order_uri
+
+    def gateway_order_uri
+      RobotPayment.gateway_order_uri
     end
 
     def purchase!
@@ -21,14 +22,14 @@ module RobotPayment
 
     def purchase
       #client = RobotPayment::Client.new
-      client = Faraday.new(url: RobotPayment.base_uri)
+      client = Faraday.new(url: gateway_order_uri)
       order = RobotPayment::Order.new
       url = order.query_builder
       client.post url
     end
 
     def query_builder
-      "#{test_uri}?#{params}"
+      "#{gateway_order_uri}?#{params}"
     end
 
     def params
