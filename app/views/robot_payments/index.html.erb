@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://credit.j-payment.co.jp/gateway/js/jquery.js"></script>
+  <script type="text/javascript" src="https://credit.j-payment.co.jp/gateway/js/CPToken.js"></script>
+</head>
+<body>
+<script>
+function doPurchase() {
+  token = CPToken.TokenCreate (
+    {
+      aid: '<%= RobotPayment.config.aid %>',
+      cn:  $("#cn").val(),
+      ed:  $("#ed_year").val() + $("#ed_month").val(),
+      fn:  $("#fn").val(),
+      ln:  $("#ln").val(),
+      cvv: $("#cvv").val()
+    },
+    execPurchase );
+}
+
+function execPurchase(resultCode, errMsg, token) {
+  if (resultCode != "Success") {
+    window.alert(errMsg);
+  } else {
+  $("#cn").val("");
+  $("#ed_year").val("");
+  $("#ed_month").val("");
+  $("#fn").val("");
+  $("#ln").val("");
+
+  var order_url = "<%= RobotPayment.token_order_uri %>"
+  var params = $("#mainform").serialize();
+    $.ajax({
+      type: 'get',
+      url: order_url,
+      dataType: "jsonp",
+      data: params,
+      complete: function(data,status,xhr) {
+        console.log("completed");
+      }
+    });
+  }
+}
+</script>
+
+  <form id="mainform" action="<%= RobotPayment.token_order_uri %>">
+  <span style="color: red;">*</span>aid
+  <input type="text" name="aid" id="aid" value="<%= RobotPayment.config.aid %>">
+  <br>
+  <span style="color: red;">*</span>rt
+  <input type="text" name="rt" id="rt" value="<%= RobotPayment.config.rt %>">
+  <br>
+  <span style="color: red;">*</span>カード番号:
+  <input type="text" name="cn" id="cn" value="4111111111111111">
+  <br>
+  <span style="color: red;">*</span>カード有効期限:
+  year / month
+  <input type="text" name="ed_year" id="ed_year" value="25">
+   /
+  <input type="text" name="ed_month" id="ed_month" value="12">
+  <br>
+  <span style="color: red;">*</span>カード名義人:
+  <input type="text" name="fn" id="fn" value="SAMPLE">
+  <input type="text" name="ln" id="ln" value="TARO">
+  <br>
+  <span style="color: red;">*</span>cvv
+  <input type="text" name="cvv" id="cvv" value="321">
+  <br>
+  <span style="color: red;">*</span>tel:
+  <input type="text" name="pn" id="pn" value="0660123456">
+  <br>
+  <span style="color: red;">*</span>email:
+  <input type="text" name="em" id="em" value="test@example.com">
+  <br>
+
+  <span style="color: red;">*</span>am
+  <input type="text" name="am" id="am" value="2000">
+  <br>
+
+  <span style="color: red;">*</span>tx
+  <input type="text" name="tx" id="tx" value="80">
+  <br>
+  <span style="color: red;">*</span>sf
+  <input type="text" name="sf" id="sf" value="100">
+  <br>
+  <span style="color: red;">*</span>jb
+  <input type="text" name="jb" id="jb" value="CAPTURE">
+  <br>
+  <span style="color: red;">*</span>tkn
+  <input id="tkn" name="tkn" type="text">
+  <input type="button" value="購入する" name="purchase" id="purchase" onclick="doPurchase();"/>
+  </form>
+
+
+</body>
+</html>
