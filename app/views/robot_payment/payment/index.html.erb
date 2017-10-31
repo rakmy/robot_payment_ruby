@@ -1,0 +1,96 @@
+<script>
+function order_submit () {
+  document.getElementById("purchase").disabled = true;
+  request_token();
+}
+
+function request_token() {
+  token = CPToken.TokenCreate (
+    {
+      aid: '<%= RobotPayment.config.aid %>',
+      cn:  document.getElementById("cn").value,
+      ed:  document.getElementById("ed_year").value + document.getElementById("ed_month").value,
+      fn:  document.getElementById("fn").value,
+      ln:  document.getElementById("ln").value,
+      cvv: document.getElementById("cvv").value
+    },
+    token_callback );
+}
+
+function token_callback(resultCode, errMsg) {
+  if (resultCode != "Success") {
+    window.alert(errMsg);
+    document.getElementById("purchase").disabled = false;
+  } else {
+    clear_cns();
+    document.mainform.submit();
+    ensure_clear_form();
+  }
+}
+
+function clear_cns(){
+  document.getElementById("cn").remove();
+  document.getElementById("ed_year").remove();
+  document.getElementById("ed_month").remove();
+  document.getElementById("fn").remove();
+  document.getElementById("ln").remove();
+  document.getElementById("cvv").remove();
+}
+
+function ensure_clear_form() {
+  document.getElementById("robot_payment_form").remove();
+}
+
+</script>
+<div id="robot_payment_form">
+  <%= form_tag robot_payment_pay_path, method: "post", id: "mainform", name: "mainform" do %>
+  <span style="color: red;">*</span>カード番号:
+  <input type="text" name="cn" id="cn"
+  required="required" area-required="true"
+  pattern="[0-9]{0,16}"
+  size="16" maxlength="16"
+  placeholder="4444 3333 2222 1111"
+  value="4111111111111111"
+  style="ime-mode: disabled;">
+  <br>
+
+  <span style="color: red;">*</span>カード有効期限:
+  year / month
+  <input type="text" name="ed_year" id="ed_year" value="25">
+   /
+  <input type="text" name="ed_month" id="ed_month" value="12">
+  <br>
+
+  <span style="color: red;">*</span>カード名義人:
+  <input type="text" name="fn" id="fn" value="SAMPLE">
+  <input type="text" name="ln" id="ln" value="TARO">
+  <br>
+
+  <span style="color: red;">*</span>cvv
+  <input type="text" name="cvv" id="cvv" value="321"
+  size="4"
+  maxlength="5">
+  <br>
+
+  <span style="color: red;">*</span>tel:
+  <input type="text" name="pn" id="pn" value="0660123456"
+  pattern="[\d]{0,16}"
+  maxlength="20"
+  style="ime-mode: disabled;">
+  <br>
+
+  <label for="em">Email <abbr title="Required">*</abbr></label>
+  <input name="em" id="em" type="email" spellcheck="false" size="30"
+  required="required" aria-required="true"
+  pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+  value="test@example.com"
+  style="ime-mode: disabled;">
+  <br>
+
+  <input id="tkn" name="tkn" type="hidden">
+
+  <button type="submit" name="purchase" id="purchase" onclick="order_submit();"/>購入する</button>
+  <% end %>
+</div>
+</body>
+</html>
