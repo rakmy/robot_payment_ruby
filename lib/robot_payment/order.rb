@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 require "faraday"
 require "json"
-require "base64"
 
 module RobotPayment
   class Order
 
     def gateway_order_uri
       RobotPayment.gateway_order_uri
+    end
+
+    def token_order_uri
+      RobotPayment.token_order_uri
     end
 
     def purchase!
@@ -20,19 +23,38 @@ module RobotPayment
       end
     end
 
-    def purchase
-      #client = RobotPayment::Client.new
-      client = Faraday.new(url: gateway_order_uri)
+    def gateway_test_purchase
+      client = Faraday.new(url: gateway_order_uri)  # TODO client = RobotPayment::Client.new
       order = RobotPayment::Order.new
-      url = order.query_builder
+      url = order.gateway_query_builder
       client.post url
     end
 
-    def query_builder
-      "#{gateway_order_uri}?#{params}"
+    def token_purchase(params)
+      client = Faraday.new(url: gateway_order_uri)  # TODO client = RobotPayment::Client.new
+      order = RobotPayment::Order.new
+      url = order.token_query_builder(params)
+      client.post url
     end
 
-    def params
+    def gateway_query_builder
+      "#{gateway_order_uri}?#{test_params}"
+    end
+
+    def token_query_builder(params)
+      "#{token_order_uri}?#{basic_params(params)}"
+    end
+
+    def basic_params(params)
+      q = {
+        aid: RobotPayment.config.aid,
+        rt:  RobotPayment.config.rt,
+        jb:  RobotPayment.config.jb }
+      q.merge!(params) if params
+      q = q.map{|key,val| "#{key}=#{val}"}.join("&")
+    end
+
+    def test_params
       q = {
         aid: RobotPayment.config.aid,
         rt:  RobotPayment.config.rt,
