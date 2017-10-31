@@ -4,7 +4,6 @@ module RobotPayment
     end
 
     def pay
-      order = RobotPayment::Order.new
       user_params = {
         pn:  params[:pn],   # * phone number
         em:  params[:em],   # * email
