@@ -11,7 +11,10 @@
 <% else %>
 決済結果にエラーがあります。
 <br>
-エラーコード: <%= @response_array[3] %>
+エラーコード: <%= @response_array[3] %><br>
+<% if @response_array[3] %>
+  エラー内容: <%= RobotPayment::ApiError::MERCHANT_DIFINITIONS["#{@response_array[3]}"] %>
+<% end %>
 <br>
 <% end %>
 -------------<br>
