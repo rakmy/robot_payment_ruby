@@ -1,0 +1,22 @@
+<% @response_array = @response.body.split(",") %>
+<% if @response_array[1] == "1" %>
+決済に成功しました。<br>
+決済番号: <%= @response_array[0] %><br>
+商品金額: <%= @response_array[6] %><br>
+税額:    <%= @response_array[7] %><br>
+送料:    <%= @response_array[8] %><br>
+-------------<br>
+合計金額: <%= @response_array[9] %><br>
+<br>
+<% else %>
+決済結果にエラーがあります。
+<br>
+エラーコード: <%= @response_array[3] %>
+<br>
+<% end %>
+-------------<br>
+お客様情報
+<br>
+電話番号: <%= @query[:pn] %>
+<br>
+メールアドレス: <%= @query[:em] %>
