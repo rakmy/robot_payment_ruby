@@ -43,7 +43,7 @@ module RobotPayment
         .merge(trials)
       @url = "#{RobotPayment.token_order_uri}"
       charge = RobotPayment::Charge.new
-      @response = charge.token_purchase(@query)
+      @response = charge.create_by_token(@query)
     end
 
     # robot_payment に投げるparamater
