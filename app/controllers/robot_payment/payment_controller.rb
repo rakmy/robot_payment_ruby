@@ -42,8 +42,8 @@ module RobotPayment
         .merge(optionals)
         .merge(trials)
       @url = "#{RobotPayment.token_order_uri}"
-      order = RobotPayment::Order.new
-      @response = order.token_purchase(@query)
+      charge = RobotPayment::Charge.new
+      @response = charge.token_purchase(@query)
     end
 
     # robot_payment に投げるparamater
