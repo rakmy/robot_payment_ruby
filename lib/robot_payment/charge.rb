@@ -13,16 +13,6 @@ module RobotPayment
       RobotPayment.token_charge_uri
     end
 
-    def purchase!
-      if params.valid?
-        purchase
-      else
-        raise ValidationError, "ParamaterError. " \
-        "Required params is missing. " \
-        "See docs at https://jpayment.zendesk.com/hc/ja/sections/200338447 "
-      end
-    end
-
     def create_by_gateway  # Deprecated due to security, so this is ONLY TEST method for gateway.
       client = Faraday.new(url: gateway_charge_uri)
       charge = RobotPayment::Charge.new
@@ -70,8 +60,5 @@ module RobotPayment
       q = q.map{|key,val| "#{key}=#{val}"}.join("&")
     end
 
-    def valid?
-      #TODO
-    end
   end
 end
