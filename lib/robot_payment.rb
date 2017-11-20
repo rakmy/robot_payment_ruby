@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'robot_payment/config'
 require 'robot_payment/order'
+require 'robot_payment/auto_charge'
 require 'robot_payment/api_error/definitions'
 
 module RobotPayment
@@ -31,4 +32,9 @@ module RobotPayment
   def self.token_order_uri
     @token_order_uri
   end
+
+  def self.update_autocharge_url
+    @update_uri
+  end
+
 end
