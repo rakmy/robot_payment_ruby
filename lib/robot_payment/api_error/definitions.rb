@@ -108,5 +108,6 @@ module RobotPayment
       'G9842G980000' => '取扱不可カード',
       'G9942G990000' => '取扱不可カード'
     }
+    API_DIFINITIONS = MERCHANT_DIFINITIONS.merge(CREDIT_UNION_DIFINITIONS)
   end
 end
