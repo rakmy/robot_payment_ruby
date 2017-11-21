@@ -32,4 +32,9 @@ module RobotPayment
   def self.token_charge_uri
     @token_charge_uri
   end
+
+  def self.update_autocharge_url
+    @update_uri
+  end
+
 end
