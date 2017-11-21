@@ -3,14 +3,14 @@ require "faraday"
 require "json"
 
 module RobotPayment
-  class Order
+  class Charge
 
-    def gateway_order_uri
-      RobotPayment.gateway_order_uri
+    def gateway_charge_uri
+      RobotPayment.gateway_charge_uri
     end
 
-    def token_order_uri
-      RobotPayment.token_order_uri
+    def token_charge_uri
+      RobotPayment.token_charge_uri
     end
 
     def purchase!
@@ -23,26 +23,26 @@ module RobotPayment
       end
     end
 
-    def gateway_test_purchase
-      client = Faraday.new(url: gateway_order_uri)  # TODO client = RobotPayment::Client.new
-      order = RobotPayment::Order.new
-      url = order.gateway_query_builder
+    def create_by_gateway  # Deprecated due to security, so this is ONLY TEST method for gateway.
+      client = Faraday.new(url: gateway_charge_uri)
+      charge = RobotPayment::Charge.new
+      url = charge.gateway_query_builder
       client.post url
     end
 
-    def token_purchase(params)
-      client = Faraday.new(url: gateway_order_uri)  # TODO client = RobotPayment::Client.new
-      order = RobotPayment::Order.new
-      url = order.token_query_builder(params)
+    def create_by_token(params)
+      client = Faraday.new(url: gateway_charge_uri)  # TODO client = RobotPayment::Client.new
+      charge = RobotPayment::Charge.new
+      url = charge.token_query_builder(params)
       client.post url
     end
 
     def gateway_query_builder
-      "#{gateway_order_uri}?#{test_params}"
+      "#{gateway_charge_uri}?#{test_params}"
     end
 
     def token_query_builder(params)
-      "#{token_order_uri}?#{basic_params(params)}"
+      "#{token_charge_uri}?#{basic_params(params)}"
     end
 
     def basic_params(params)

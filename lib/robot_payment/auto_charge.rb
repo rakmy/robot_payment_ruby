@@ -9,10 +9,10 @@ module RobotPayment
       RobotPayment.update_autocharge_url
     end
 
-    def update_charge(params)
+    def update_by_token(params)
       client = Faraday.new(url: update_autocharge_url)  # TODO client = RobotPayment::Client.new
-      order = RobotPayment::AutoCharge.new
-      url = order.query_builder(params)
+      charge = RobotPayment::AutoCharge.new
+      url = charge.query_builder(params)
       client.post url
     end
 

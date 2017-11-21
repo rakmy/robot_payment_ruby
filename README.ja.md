@@ -36,9 +36,9 @@ gem 'robot_payment_ruby', path: "/path/to/foo"
 ## 使い方 (随時更新)
 
 ``` ruby
-order = RobotPayment::Order.new
+charge = RobotPayment::Charge.new
 
-order.purchase
+charge.purchase
 => Faraday::Response
 ```
 
