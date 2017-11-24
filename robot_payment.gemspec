@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'faraday', '~> 0.7'
-  s.add_dependency 'json', '~> 2.0'
+  s.add_dependency 'json', '~> 1.7'
 
 end
