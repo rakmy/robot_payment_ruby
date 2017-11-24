@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.version     = '0.1'
   s.summary     = 'Robot Payment rails helper'
   s.description = ""
-  s.required_ruby_version = '>= 2.4.0'
+  s.required_ruby_version = '>= 2.3.0'
 
   s.author    = 'digitalm'
   s.email     = 'digitalm.github@gmail.com'
