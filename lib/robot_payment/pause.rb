@@ -9,7 +9,7 @@ module RobotPayment
       RobotPayment.pause_url
     end
 
-    def pause(params)
+    def update(params)
       client = Faraday.new(url: pause_url)
       charge = RobotPayment::Pause.new
       url = charge.query_builder(params)
