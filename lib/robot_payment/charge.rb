@@ -14,34 +14,25 @@ module RobotPayment
     end
 
     def create_by_gateway  # Deprecated due to security, so this is ONLY TEST method for gateway.
-      client = Faraday.new(url: gateway_charge_uri)
+      client = Faraday.new
       charge = RobotPayment::Charge.new
-      url = charge.gateway_query_builder
-      client.post url
+      url = gateway_charge_uri
+      client.post url, test_params
     end
 
     def create_by_token(params)
-      client = Faraday.new(url: gateway_charge_uri)  # TODO client = RobotPayment::Client.new
+      client = Faraday.new
       charge = RobotPayment::Charge.new
-      url = charge.token_query_builder(params)
-      client.post url
+      url = token_charge_uri
+      client.post url, post_params(params)
     end
 
-    def gateway_query_builder
-      "#{gateway_charge_uri}?#{test_params}"
-    end
-
-    def token_query_builder(params)
-      "#{token_charge_uri}?#{basic_params(params)}"
-    end
-
-    def basic_params(params)
+    def post_params(params)
       q = {
         aid: RobotPayment.config.aid,
         rt:  RobotPayment.config.rt,
         jb:  RobotPayment.config.jb }
       q.merge!(params) if params
-      q = q.map{|key,val| "#{key}=#{val}"}.join("&")
     end
 
     def test_params
@@ -57,7 +48,6 @@ module RobotPayment
         em:  "mika.mizuno@knowledgelabo.com",
         pn:  "0668097072",
         iid: "cs001"}
-      q = q.map{|key,val| "#{key}=#{val}"}.join("&")
     end
 
   end
