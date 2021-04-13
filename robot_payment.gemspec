@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'robot_payment'
-  s.version     = '0.1'
+  s.version     = '0.2'
   s.summary     = 'Robot Payment rails helper'
   s.description = ""
-  s.required_ruby_version = '>= 2.3.0'
+  s.required_ruby_version = '>= 2.6.0'
 
   s.author    = 'digitalm'
   s.email     = 'digitalm.github@gmail.com'
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'faraday', '~> 0.7'
-  s.add_dependency 'json', '~> 1.7'
+  s.add_dependency 'faraday', '>= 1.0'
+  s.add_dependency 'json', '>= 1.8'
 
 end
