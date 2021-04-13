@@ -1,17 +1,21 @@
 PATH
   remote: .
   specs:
-    robot_payment (0.1)
-      faraday (~> 0.13)
-      json (~> 2.0)
+    robot_payment (0.2)
+      faraday (>= 1.0)
+      json (>= 1.8)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    faraday (0.13.1)
+    faraday (1.3.0)
+      faraday-net_http (~> 1.0)
       multipart-post (>= 1.2, < 3)
-    json (2.0.2)
-    multipart-post (2.0.0)
+      ruby2_keywords
+    faraday-net_http (1.0.1)
+    json (2.5.1)
+    multipart-post (2.1.1)
+    ruby2_keywords (0.0.4)
 
 PLATFORMS
   ruby
@@ -22,4 +26,4 @@ DEPENDENCIES
   robot_payment!
 
 BUNDLED WITH
-   1.14.5
+   1.17.3
