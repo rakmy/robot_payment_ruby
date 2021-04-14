@@ -15,6 +15,7 @@ module RobotPayment
   @update_path         = "gateway/accgate.aspx"       # 自動課金情報の変更
   @pause_path          = "gateway/acsgate.aspx"       # 停止処理
   @pause_link_path     = "gateway/acstop.aspx"        # リンク方式による停止処理URI
+  @onetouch_path       = "gateway/onetouch.aspx"      # ワンタッチ課金
 
   @base_uri = "https://credit.j-payment.co.jp/"
   @gateway_charge_uri = "#{@base_uri}#{@gateway_charge_path}"
@@ -22,6 +23,7 @@ module RobotPayment
   @update_uri         = "#{@base_uri}#{@update_path}"
   @pause_uri          = "#{@base_uri}#{@pause_path}"
   @pause_link_uri     = "#{@base_uri}#{@pause_link_path}"
+  @onetouch_uri       = "#{@base_uri}#{@onetouch_path}"
 
   def self.base_uri
     @base_uri
@@ -45,5 +47,9 @@ module RobotPayment
 
   def self.pause_link_url
     @pause_link_uri
+  end
+
+  def self.onetouch_url
+    @onetouch_uri
   end
 end
