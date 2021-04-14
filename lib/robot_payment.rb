@@ -3,6 +3,7 @@ require 'robot_payment/config'
 require 'robot_payment/charge'
 require 'robot_payment/auto_charge'
 require 'robot_payment/pause'
+require 'robot_payment/onetouch'
 require 'robot_payment/api_error/definitions'
 
 module RobotPayment
