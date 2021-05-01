@@ -16,13 +16,14 @@ module RobotPayment
   end
 
   class Config
-    attr_accessor :aid, :rt, :jb, :max_amount, :min_amount
+    attr_accessor :aid, :rt, :jb, :max_amount, :min_amount, :proxy
     def initialize
       @aid = ENV["AID"]
       @rt = 1
       @jb = "CAPTURE"
       @max_amount = 1000
       @min_amount = 100_000
+      @proxy = ENV["PROXY_URL"]
     end
   end
 end

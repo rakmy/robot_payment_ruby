@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'robot_payment'
-  s.version     = '0.4'
+  s.version     = '0.5'
   s.summary     = 'Robot Payment rails helper'
   s.description = ""
   s.required_ruby_version = '>= 2.6.0'

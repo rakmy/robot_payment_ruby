@@ -9,7 +9,7 @@ module RobotPayment
     end
 
     def create(params)
-      client = Faraday.new(url: onetouch_url)
+      client = Faraday.new(url: onetouch_url, proxy: RobotPayment.config.proxy)
       charge = RobotPayment::Onetouch.new
       url = charge.query_builder(params)
       client.post url

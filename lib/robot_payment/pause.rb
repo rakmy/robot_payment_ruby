@@ -10,7 +10,7 @@ module RobotPayment
     end
 
     def update(params)
-      client = Faraday.new(url: pause_url)
+      client = Faraday.new(url: pause_url, proxy: RobotPayment.config.proxy)
       charge = RobotPayment::Pause.new
       url = charge.query_builder(params)
       client.post url

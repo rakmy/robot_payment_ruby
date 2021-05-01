@@ -14,14 +14,14 @@ module RobotPayment
     end
 
     def create_by_gateway  # Deprecated due to security, so this is ONLY TEST method for gateway.
-      client = Faraday.new
+      client = Faraday.new(proxy: RobotPayment.config.proxy)
       charge = RobotPayment::Charge.new
       url = gateway_charge_uri
       client.post url, test_params
     end
 
     def create_by_token(params)
-      client = Faraday.new
+      client = Faraday.new(proxy: RobotPayment.config.proxy)
       charge = RobotPayment::Charge.new
       url = token_charge_uri
       client.post url, post_params(params)
